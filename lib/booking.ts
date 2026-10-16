@@ -44,7 +44,7 @@ export type Booking = {
   total: number;
   guest: { name: string; email: string; phone: string };
   method: string;
-  status: "confirmed" | "cancelled";
+    status: "confirmed" | "checked_in" | "checked_out" | "cancelled";
   created: string;
 };
 
