@@ -1,10 +1,10 @@
 "use client";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { KES, findBooking, type Booking } from "@/lib/booking";
 
-export default function Confirmation() {
+function ConfirmationInner() {
   const ref = useSearchParams().get("ref") ?? "";
   // Hydration fix: localStorage only exists on the client. Render an identical
   // skeleton on server + first client paint, then look up the booking after mount.
@@ -51,5 +51,13 @@ export default function Confirmation() {
         <Link className="lnk" href="/">← Back to homepage</Link> · <Link className="lnk" href="/manage">Manage another booking</Link>
       </div></section>
     </main>
+  );
+}
+
+export default function Confirmation() {
+  return (
+    <Suspense fallback={null}>
+      <ConfirmationInner />
+    </Suspense>
   );
 }

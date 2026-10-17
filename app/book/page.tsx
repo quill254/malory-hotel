@@ -1,12 +1,12 @@
 "use client";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { CATALOG, KES, availability, createBooking, nights, type Quote } from "@/lib/booking";
 
 type Guest = { name: string; email: string; phone: string; requests?: string };
 
-export default function BookPage() {
-  const qs = useSearchParams();
+function BookInner() {
+const qs = useSearchParams();
   const pre = qs.get("room");
   const [step, setStep] = useState(pre ? 1 : 0);
   const [ci, setCi] = useState("2026-11-10");
@@ -140,5 +140,13 @@ export default function BookPage() {
         )}
       </div></section>
     </main>
+  );
+}
+
+export default function BookPage() {
+  return (
+    <Suspense fallback={null}>
+      <BookInner />
+    </Suspense>
   );
 }

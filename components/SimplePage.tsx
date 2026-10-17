@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-export type SimpleProps = { title: string; eyebrow?: string; h1: string; intro: string; children: React.ReactNode };
+export type SimpleProps = { title?: string; eyebrow?: string; h1: string; intro: string; children: React.ReactNode };
 
 export function simpleMetadata(p: { title: string; intro: string }): Metadata {
   return { title: p.title, description: p.intro };
